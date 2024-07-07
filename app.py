@@ -159,24 +159,28 @@ def pending():
                     raise ValueError
             except:
                 print("invalid input please try again")
+                continue
             try:
                 A = input(f"enter {row*column} numbers for A matrix\n(camma seperated numbers): ").strip().split()
-                A = list(map(lambda x: int(x), A))
+                A = list(map(lambda x: float(x), A))
+                len(A)
                 if len(A) != row*column:
                     raise ValueError("invalid input please try again")
                 A = np.array(A)
                 new_A_array = A.reshape(row, column)
             except:
                 print("invalid input please try again")
+                continue
             try:
                 b = input(f"enter {row} numbers for A matrix\n(camma seperated numbers): ").strip().split()
-                b = list(map(lambda x: int(x), b))
+                b = list(map(lambda x: float(x), b))
                 if len(A) != row*column:
                     raise ValueError("invalid input please try again")
                 b = np.array(b)
                 new_b_array = b.reshape(row, 1)
             except:
                 print("invalid input please try again")
+                continue
 
             matrices, error_margin = main(new_A_array, new_b_array)
             print(showing(matrices, error_margin))    
