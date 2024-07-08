@@ -175,7 +175,7 @@ def pending():
             try:
                 b = input(f"enter {row} numbers for A matrix\n(camma seperated numbers): ").strip().split()
                 b = list(map(lambda x: float(x), b))
-                if len(A) != row*column:
+                if len(b) != row:
                     raise ValueError("invalid input please try again")
                 b = np.array(b)
                 new_b_array = b.reshape(row, 1)

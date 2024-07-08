@@ -11,19 +11,8 @@ import math
 
 
 
-def main():
-    A_array = np.array([
-                    [1, 1, 0],
-                    [1, 0, 1],
-                    [0, 1, 1]
-                    ])
+def main(A_array, b_array):
 
-    b_array = np.array([
-                    [3],
-                    [7],
-                    [6],
-                    ])
-    
 
     def norm(arr):
         res = 0
@@ -100,7 +89,7 @@ def main():
     X = np.matrix(X)
 
     print()
-    print("--------- (QR decomposition ----------)")
+    print("--------- (QR decomposition) ----------")
     print()
     print("------------- A matrix ----------------")
     print(A_array)
@@ -142,24 +131,21 @@ def main():
     print()
 
 
-main()  
-
-
 def pending():
     # example arrays
     A_array = np.array([
-                    [1, 0, 4],
-                    [2, 2, 10],
-                    [1, -2, 1],
-                    [1, -2, -2]
+                    [1, 1, 0],
+                    [1, 0, 1],
+                    [0, 1, 1]
                     ])
+
 
     b_array = np.array([
                     [3],
                     [7],
                     [6],
-                    [1]
                     ])
+    
 
     print()
     print("%"*40)
@@ -182,40 +168,40 @@ def pending():
         if inp == 1:
             print("fill the below matrices(comma seperated numbers)")
             try:
-                dim = input("the dimentions of the A\n(comma seperated integers and the first number greater equal to second one): ").strip().split(" ")
-                row = int(dim[0])
-                column = int(dim[1])
-                if column > row or not isinstance(row, int) or not isinstance(column, int):
+                dim = int(input("dimention of the A(an integer number): "))
+                if not isinstance(dim, int) or not isinstance(dim, int):
                     raise ValueError
             except:
                 print("invalid input please try again")
                 continue
             try:
-                A = input(f"enter {row*column} numbers for A matrix\n(camma seperated numbers): ").strip().split()
+                A = input(f"enter {dim*dim} numbers for A matrix\n(camma seperated numbers): ").strip().split()
                 A = list(map(lambda x: float(x), A))
                 len(A)
-                if len(A) != row*column:
+                if len(A) != dim*dim:
                     raise ValueError("invalid input please try again")
                 A = np.array(A)
-                new_A_array = A.reshape(row, column)
+                new_A_array = A.reshape(dim, dim)
             except:
                 print("invalid input please try again")
                 continue
             try:
-                b = input(f"enter {row} numbers for A matrix\n(camma seperated numbers): ").strip().split()
+                b = input(f"enter {dim} numbers for A matrix\n(camma seperated numbers): ").strip().split()
                 b = list(map(lambda x: float(x), b))
-                if len(A) != row*column:
+                if len(b) != dim:
                     raise ValueError("invalid input please try again")
                 b = np.array(b)
-                new_b_array = b.reshape(row, 1)
+                new_b_array = b.reshape(dim, 1)
             except:
                 print("invalid input please try again")
                 continue
 
+            main(new_A_array, new_b_array)
+
         elif inp == 2:
-            ...
+            main(A_array, b_array)
         elif inp == 3:
             break
 
 
-# pending()
+pending()
