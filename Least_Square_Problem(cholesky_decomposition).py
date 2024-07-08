@@ -1,9 +1,9 @@
-# least square problem using choleski decomposition
+# solving least square problem using cholesky decomposition
 
 # min||AX - b|| if A shape is (m, n) and m >= n
-# if m = n -> X = A(t)b 
 
-# the caclulations are rounded to 3 digit
+# the caclulations error is in python defult 
+# the result in the termainal is rounded to 5 digit
 
 import numpy as np
 # using numpy for operating on matrices[the operatoins used: Adding, multiplying and transposing]
@@ -55,7 +55,9 @@ def main(A_array, b_array):
 
 
     Rt = choleski(R_Rt)
-    matrices["R"] = Rt
+    matrices["Rt"] = Rt
+    R = np.asarray(Rt.getT())
+    matrices["R"] = R
 
     # Rt*R*X = _b --> R*X = Y --> RtY = _b --> Y = ?
 
@@ -77,7 +79,6 @@ def main(A_array, b_array):
     # RX = Y --> X = ?
 
     arr_y = np.squeeze(np.asarray(Y))
-    R = np.asarray(Rt.getT())
     arr_R = np.squeeze(np.asarray(R))
     X = np.zeros((n, 1))
     for i in range(n-1, -1, -1):
@@ -109,7 +110,7 @@ def showing(matrices, error_margin):
     s = ''
     for key, value in matrices.items():
         s += "*"*40 + '\n'
-        value = value.round(3)
+        value = value.round(5)
         s += f"{key} matrix:\n{value}" + '\n'
         s += "*"*40 + "\n\n"
     s += f"infinite norm of error matrix: {error_margin}\n\n"
@@ -143,7 +144,7 @@ def pending():
         print("-"*40)
         print()
         print("1 for writing A and b matrices manually")
-        print("2 if you want to see the example of the code")
+        print("2 for an example")
         print("3 for quiting")
         print()
         inp = int(input("your option: ").strip())
